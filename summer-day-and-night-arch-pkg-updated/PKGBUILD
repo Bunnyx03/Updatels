@@ -1,0 +1,81 @@
+# Maintainer: Your Name <your.email@example.com>
+
+pkgname=summer-day-and-night-theme
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Summer Day and Night Hyprland rice theme"
+arch=('any')
+url="https://github.com/yourusername/summer-day-and-night"
+license=('MIT')
+depends=(
+  'hyprland-meta'
+  'waybar-git'
+  'wofi'
+  'kitty-git'
+  'nemo-git'
+  'brave-nightly-git'
+  'ttf-jetbrains-mono-nerd'
+  'python-pyquery'
+  'cliphist'
+  'wl-clipboard'
+  'dunst'
+  'nitch'
+  'python'
+  'polkit-kde-agent'
+)
+optdepends=(
+  'everforest-gtk-theme-git: GTK theme for the rice'
+  'everforest-icon-theme-git: Icon theme for the rice'
+  'visual-studio-code-bin: Recommended editor with Everforest theme'
+  'zsh: For P10K prompt'
+  'zsh-theme-powerlevel10k: For P10K prompt'
+  'i3lock: For screen locking'
+  'betterlockscreen: For improved screen locking'
+)
+source=("$pkgname-$pkgver.zip::file:///tmp/summer-day-and-night-main.zip")
+sha256sums=('SKIP')
+install="$pkgname.install"
+
+package() {
+  # Create directories
+  mkdir -p "$pkgdir/usr/share/$pkgname"
+  mkdir -p "$pkgdir/etc/skel/.config/hypr"
+  mkdir -p "$pkgdir/etc/skel/.config/waybar"
+  mkdir -p "$pkgdir/etc/skel/.config/wofi"
+  mkdir -p "$pkgdir/etc/skel/.config/kitty"
+  
+  # Copy files to package directory
+  cp -r "$srcdir/summer-day-and-night-main/"* "$pkgdir/usr/share/$pkgname/"
+  
+  # Copy configuration files to skeleton directory
+  cp -r "$srcdir/summer-day-and-night-main/hypr/"* "$pkgdir/etc/skel/.config/hypr/"
+  cp -r "$srcdir/summer-day-and-night-main/waybar/"* "$pkgdir/etc/skel/.config/waybar/"
+  cp -r "$srcdir/summer-day-and-night-main/wofi/"* "$pkgdir/etc/skel/.config/wofi/"
+  cp -r "$srcdir/summer-day-and-night-main/kitty/"* "$pkgdir/etc/skel/.config/kitty/"
+  
+  # Make scripts executable
+  find "$pkgdir" -name "*.sh" -exec chmod +x {} \;
+  find "$pkgdir" -name "*.py" -exec chmod +x {} \;
+  
+  # Create a README file with installation instructions
+  mkdir -p "$pkgdir/usr/share/doc/$pkgname"
+  cat > "$pkgdir/usr/share/doc/$pkgname/README.md" << EOF
+# Summer Day and Night Theme
+
+This package installs the Summer Day and Night theme for Hyprland.
+
+## Usage
+
+The configuration files have been installed to your home directory.
+To switch between day and night themes, use Super+Shift+T.
+
+## Dependencies
+
+All required dependencies have been installed automatically.
+Optional dependencies can be installed separately.
+
+## Credits
+
+Wallpapers and theme created by the original author.
+EOF
+}

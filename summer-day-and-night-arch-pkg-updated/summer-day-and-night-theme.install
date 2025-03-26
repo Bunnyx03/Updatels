@@ -1,0 +1,19 @@
+post_install() {
+  echo "==> Summer Day and Night Theme has been installed!"
+  echo "    Configuration files are available in /usr/share/summer-day-and-night-theme"
+  echo "    To use this theme, copy the configuration files to your home directory:"
+  echo "    cp -r /etc/skel/.config/hypr ~/.config/"
+  echo "    cp -r /etc/skel/.config/waybar ~/.config/"
+  echo "    cp -r /etc/skel/.config/wofi ~/.config/"
+  echo "    cp -r /etc/skel/.config/kitty ~/.config/"
+  echo ""
+  echo "    To switch between day and night themes, use Super+Shift+T"
+  echo ""
+  echo "    Note: For the 3D border effect mentioned in the README,"
+  echo "    you may need to modify your Hyprland source code as described"
+  echo "    in /usr/share/summer-day-and-night-theme/README.md"
+}
+
+post_upgrade() {
+  post_install
+}
