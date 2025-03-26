@@ -5,7 +5,7 @@ pkgver=1.0.0
 pkgrel=1
 pkgdesc="Summer Day and Night Hyprland rice theme"
 arch=('any')
-url="https://github.com/yourusername/summer-day-and-night"
+url="https://github.com/Bunnyx03/Updatels.git"
 license=('MIT')
 depends=(
   'hyprland-meta'
